@@ -30,5 +30,14 @@ services:
       - POSTGRES_DB=postgres
       # sets the schema name, this should match the `NAMESPACE` env var set in your .env file
       - DB_NAMESPACE=auth
+  webserver:
+    image: nginx:latest
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - ./nginx_conf/:/etc/nginx/conf.d/:ro
+      - /home/abhi/certs:/etc/nginx/certs/:ro
 volumes:
   postgres_data:
